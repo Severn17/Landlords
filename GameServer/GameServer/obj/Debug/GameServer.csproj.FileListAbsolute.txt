@@ -1,0 +1,2 @@
+D:\GitHubOrCoding\Unity\DouDiZhu\GameServer\GameServer\bin\Debug\GameServer.exe.config
+D:\GitHubOrCoding\Unity\DouDiZhu\Landlords\GameServer\GameServer\bin\Debug\GameServer.exe.config
