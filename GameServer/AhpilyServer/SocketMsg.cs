@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using System.Net;
-using System.Net.Sockets;
-using System.Threading;
-
-namespace AhpilyServer
+﻿namespace AhpilyServer
 {
     /// <summary>
     /// 网络消息
@@ -27,7 +17,7 @@ namespace AhpilyServer
         {
 
         }
-        public SocketMsg(int opCode,int subCode,int value)
+        public SocketMsg(int opCode, int subCode, int value)
         {
             this.OpCode = opCode;
             this.SubCode = subCode;

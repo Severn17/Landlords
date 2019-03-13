@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
@@ -127,7 +121,7 @@ namespace AhpilyServer
         {
             try
             {
-               bool result = client.ClientSocket.ReceiveAsync(client.ReceiveArgs);
+                bool result = client.ClientSocket.ReceiveAsync(client.ReceiveArgs);
                 if (result == false)
                 {
                     processReceive(client.ReceiveArgs);
@@ -149,7 +143,7 @@ namespace AhpilyServer
             ClientPeer client = e.UserToken as ClientPeer;
 
             // 判断网络消息是否成功
-            if (client.ReceiveArgs.SocketError == SocketError.Success&&client.ReceiveArgs.BytesTransferred>0)
+            if (client.ReceiveArgs.SocketError == SocketError.Success && client.ReceiveArgs.BytesTransferred > 0)
             {
                 byte[] packet = new byte[client.ReceiveArgs.BytesTransferred];
                 // 拷贝到数组
@@ -178,7 +172,7 @@ namespace AhpilyServer
         /// 当接收成功时触发的事件
         /// </summary>
         /// <param name="e"></param>
-        private void receive_Completed(object sender,SocketAsyncEventArgs e)
+        private void receive_Completed(object sender, SocketAsyncEventArgs e)
         {
             processAccept(e);
         }
@@ -187,7 +181,7 @@ namespace AhpilyServer
         /// </summary>
         /// <param name="client">对应的连接对象</param>
         /// <param name="msg">解析出来的一个具体使用的类型</param>
-        private void receiveCompleted(ClientPeer client,SocketMsg msg)
+        private void receiveCompleted(ClientPeer client, SocketMsg msg)
         {
             //给应用层 让其使用
             //TODO

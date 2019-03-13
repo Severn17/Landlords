@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using System.Net;
+﻿using System.Collections.Generic;
 using System.Net.Sockets;
-using System.Threading;
 
 namespace AhpilyServer
 {
@@ -63,7 +56,7 @@ namespace AhpilyServer
             //TODO 需要再次转成一个具体类型，供我们使用
             SocketMsg msg = EncodeTool.DecodeMsg(data);
             //回调给上层
-            if (receiveCompleted!=null)
+            if (receiveCompleted != null)
             {
                 receiveCompleted(this, msg);
             }
