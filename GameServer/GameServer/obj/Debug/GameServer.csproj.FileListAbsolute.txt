@@ -1,3 +1,8 @@
-D:\GitHubOrCoding\Unity\DouDiZhu\GameServer\GameServer\bin\Debug\GameServer.exe.config
 D:\GitHubOrCoding\Unity\DouDiZhu\Landlords\GameServer\GameServer\bin\Debug\GameServer.exe.config
-E:\MyUnityProject\Landlords\Landlords\GameServer\GameServer\bin\Debug\GameServer.exe.config
+D:\GitHubOrCoding\Unity\DouDiZhu\Landlords\GameServer\GameServer\bin\Debug\GameServer.exe
+D:\GitHubOrCoding\Unity\DouDiZhu\Landlords\GameServer\GameServer\bin\Debug\GameServer.pdb
+D:\GitHubOrCoding\Unity\DouDiZhu\Landlords\GameServer\GameServer\bin\Debug\AhpilyServer.dll
+D:\GitHubOrCoding\Unity\DouDiZhu\Landlords\GameServer\GameServer\bin\Debug\AhpilyServer.pdb
+D:\GitHubOrCoding\Unity\DouDiZhu\Landlords\GameServer\GameServer\obj\Debug\GameServer.csprojResolveAssemblyReference.cache
+D:\GitHubOrCoding\Unity\DouDiZhu\Landlords\GameServer\GameServer\obj\Debug\GameServer.exe
+D:\GitHubOrCoding\Unity\DouDiZhu\Landlords\GameServer\GameServer\obj\Debug\GameServer.pdb

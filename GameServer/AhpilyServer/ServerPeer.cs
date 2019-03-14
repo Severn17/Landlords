@@ -25,6 +25,17 @@ namespace AhpilyServer
         /// </summary>
         private ClientPeerPool clientPeerPool;
 
+        // 应用层
+        private IApplication application;
+        /// <summary>
+        /// 设置应用层
+        /// </summary>
+        /// <param name="app"></param>
+        public void SetApplication(IApplication app)
+        {
+            this.application = app;
+        }
+
         // 构造函数
         public ServerPeer()
         {
@@ -50,6 +61,7 @@ namespace AhpilyServer
                     tepClientPeer = new ClientPeer();
                     tepClientPeer.ReceiveArgs.Completed += receive_Completed;
                     tepClientPeer.receiveCompleted += receiveCompleted;
+                    tepClientPeer.sendDisconnet = Disconnect;
                     clientPeerPool.Enqueue(tepClientPeer);
                 }
 
@@ -75,8 +87,7 @@ namespace AhpilyServer
                 e.Completed += acceptCompleted;
             }
 
-            // 计数
-            acceptSemaphore.WaitOne();
+
 
             bool result = serverSocket.AcceptAsync(e);
             //返回值判断异步事件是否执行完毕 如果返回了true 代表正在执行 执行完毕后会触发
@@ -102,10 +113,13 @@ namespace AhpilyServer
         /// <param name="e"></param>
         private void processAccept(SocketAsyncEventArgs e)
         {
+            // 限制线程的访问
+            acceptSemaphore.WaitOne();
             // 得到客户端的对象
             //Socket clientSocket = e.AcceptSocket;
             ClientPeer client = clientPeerPool.Dequeue();
             client.ClientSocket = e.AcceptSocket;
+
             // 开始接受数据
             startReceive(client);
             e.AcceptSocket = null;
@@ -159,12 +173,12 @@ namespace AhpilyServer
                 // 客户端主动断开连接
                 if (client.ReceiveArgs.SocketError == SocketError.Success)
                 {
-                    //TODO
+                    Disconnect(client, "客户端主动断开连接");
                 }
                 // 网络异常被动断开连接
                 else
                 {
-                    //TODO
+                    Disconnect(client, client.ReceiveArgs.SocketError.ToString());
                 }
             }
         }
@@ -184,13 +198,38 @@ namespace AhpilyServer
         private void receiveCompleted(ClientPeer client, SocketMsg msg)
         {
             //给应用层 让其使用
-            //TODO
+            application.OnReceive(client, msg);
         }
         #endregion
         #endregion
         #region 发送数据
+
         #endregion
         #region 断开连接
+        /// <summary>
+        /// 断开连接
+        /// </summary>
+        /// <param name="client">断开的客户端对象</param>
+        /// <param name="reason">断开的原因</param>
+        public void Disconnect(ClientPeer client, string reason)
+        {
+            try
+            {
+                // 清空数据
+                if (client == null)
+                    throw new Exception("当前指定的客户端连接对象为空,无法断开连接");
+                // 通知应用层 这个客户端断开连接
+                application.OnDisconnet(client);
+                client.Disconnet();
+                // 回收对象
+                clientPeerPool.Enqueue(client);
+                acceptSemaphore.Release();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
         #endregion
     }
 }
