@@ -219,7 +219,7 @@ namespace AhpilyServer
                 if (client == null)
                     throw new Exception("当前指定的客户端连接对象为空,无法断开连接");
                 // 通知应用层 这个客户端断开连接
-                application.OnDisconnet(client);
+                application.OnDisconnect(client);
                 client.Disconnet();
                 // 回收对象
                 clientPeerPool.Enqueue(client);

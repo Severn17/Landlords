@@ -1,4 +1,6 @@
 ﻿using AhpilyServer;
+using GameServer.Logic;
+using Protocol.Code;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,14 +14,24 @@ namespace GameServer
     /// </summary>
     public class NetMsgCenter : IApplication
     {
-        public void OnDisconnet(ClientPeer client)
+        IHandler account = new AccountHandler();
+
+        public void OnDisconnect(ClientPeer client)
         {
-            throw new NotImplementedException();
+            account.OnDisconnect(client);
         }
 
         public void OnReceive(ClientPeer client, SocketMsg msg)
         {
-            throw new NotImplementedException();
+            switch (msg.OpCode)
+            {
+                case OpCode.ACCOUNT:
+                    account.OnReceive(client, msg.SubCode,msg.Value);
+                    break;
+                default:
+                    break;
+            }
+            
         }
     }
 }
