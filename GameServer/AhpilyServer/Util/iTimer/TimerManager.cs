@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Timers;
+using AhpilyServer.Util.ConCurrent;
 
 namespace AhpilyServer.Util.iTimer
 {
@@ -33,11 +34,11 @@ namespace AhpilyServer.Util.iTimer
         // 移除的任务id列表
         private List<int> removeList = new List<int>();
 
-        private int id = 0;
+        private ConCurrentInt id = new ConCurrentInt(-1);
 
         public TimerManager()
         {
-            timer = new Timer(1000);
+            timer = new Timer(10);
             timer.Elapsed += Timer_Elapsed;
         }
         /// <summary>
@@ -85,7 +86,7 @@ namespace AhpilyServer.Util.iTimer
         public void AddTimeEvent(long delayTime, TimerDelegate timeDelegate)
         {
             delayTime = delayTime / 1000;
-            TimerModel model = new TimerModel(id++, DateTime.Now.Ticks + delayTime, timeDelegate);
+            TimerModel model = new TimerModel(id.Add_Get(), DateTime.Now.Ticks + delayTime, timeDelegate);
             idModelDict.TryAdd(model.Id, model);
         }
     }
