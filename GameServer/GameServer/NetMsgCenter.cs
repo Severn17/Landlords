@@ -3,9 +3,7 @@ using GameServer.Logic;
 using Protocol.Code;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace GameServer
 {
@@ -26,12 +24,12 @@ namespace GameServer
             switch (msg.OpCode)
             {
                 case OpCode.ACCOUNT:
-                    account.OnReceive(client, msg.SubCode,msg.Value);
+                    account.OnReceive(client, msg.SubCode, msg.Value);
                     break;
                 default:
                     break;
             }
-            
+
         }
     }
 }

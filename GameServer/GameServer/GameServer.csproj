@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Logic\AccountHandler.cs" />
+    <Compile Include="Logic\IHandler.cs" />
     <Compile Include="NetMsgCenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -55,10 +57,13 @@
       <Project>{537a2d30-62a5-4bd0-829b-d9662447d8af}</Project>
       <Name>AhpilyServer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Protocol\Protocol.csproj">
+      <Project>{98e8ca97-9f7e-4286-9627-2f13ae353226}</Project>
+      <Name>Protocol</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Cache\" />
-    <Folder Include="Logic\" />
     <Folder Include="Model\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
