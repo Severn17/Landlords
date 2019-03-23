@@ -2,9 +2,15 @@
 {
     public interface IApplication
     {
-        // 接收数据
-        void OnReceive(ClientPeer client, SocketMsg msg);
-        // 断开连接
+        /// <summary>
+        /// 断开连接
+        /// </summary>
+        /// <param name="client"></param>
         void OnDisconnect(ClientPeer client);
+
+        /// <summary>
+        /// 接受数据
+        /// </summary>
+        void OnReceive(ClientPeer client, SocketMsg msg);
     }
 }

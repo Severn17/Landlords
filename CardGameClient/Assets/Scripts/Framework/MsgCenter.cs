@@ -18,6 +18,7 @@ public class MsgCenter : MonoBase
 
         gameObject.AddComponent<AudioManager>();
         gameObject.AddComponent<UIManager>();
+        gameObject.AddComponent<NetManager>();
         gameObject.AddComponent<CharacterManager>();
     }
 
@@ -43,6 +44,7 @@ public class MsgCenter : MonoBase
                 break;
 
             case AreaCode.NET:
+                NetManager.instance.Execute(eventCode, message);
                 break;
 
             case AreaCode.GAME:

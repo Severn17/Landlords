@@ -229,6 +229,9 @@
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>Library\UnityAssemblies\UnityEngine.StandardEvents.dll</HintPath>
     </Reference>
+    <Reference Include="Protocol">
+      <HintPath>Assets\Plugins\Protocol.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Audio\AudioBase.cs" />
@@ -239,6 +242,10 @@
     <Compile Include="Assets\Scripts\Framework\ManagerBase.cs" />
     <Compile Include="Assets\Scripts\Framework\MonoBase.cs" />
     <Compile Include="Assets\Scripts\Framework\MsgCenter.cs" />
+    <Compile Include="Assets\Scripts\Net\ClientPeer.cs" />
+    <Compile Include="Assets\Scripts\Net\EncodeTool.cs" />
+    <Compile Include="Assets\Scripts\Net\NetManager.cs" />
+    <Compile Include="Assets\Scripts\Net\SocketMsg.cs" />
     <Compile Include="Assets\Scripts\UI\PlayPanel.cs" />
     <Compile Include="Assets\Scripts\UI\RegistPanel.cs" />
     <Compile Include="Assets\Scripts\UI\StartPanel.cs" />

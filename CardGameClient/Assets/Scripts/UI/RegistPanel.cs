@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿using Protocol;
+using Protocol.Code;
+using Protocol.Dto;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -51,6 +54,9 @@ public class RegistPanel : UIBase
         btnReigist.onClick.RemoveListener(registClick);
     }
 
+    AccountDto dto = new AccountDto();
+    SocketMsg socketMsg = new SocketMsg();
+
     /// <summary>
     /// 注册按钮的点击事件处理
     /// </summary>
@@ -66,8 +72,14 @@ public class RegistPanel : UIBase
             || inputRepeat.text != inputPassword.text)
             return;
 
-        //需要和服务器交互了
-        //TODO
+        dto.account = inputAccount.text;
+        dto.password = inputPassword.text;
+        socketMsg.OpCode = OpCode.ACCOUNT;
+        socketMsg.SubCode = AccountCode.REGIST_CREQ;
+        socketMsg.Value = dto;
+        //AccountDto dto = new AccountDto(inputAccount.text, inputPassword.text);
+        //SocketMsg socketMsg = new SocketMsg(OpCode.ACCOUNT, AccountCode.REGIST_CREQ, dto);
+        Dispatch(AreaCode.NET, 0, socketMsg);
     }
 
     private void closeClick()

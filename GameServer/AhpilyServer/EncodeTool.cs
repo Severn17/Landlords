@@ -48,7 +48,7 @@ namespace AhpilyServer
         /// 解析消息体，从缓存里取出一个一个完整的数据包
         /// </summary>
         /// <returns></returns>
-        public static byte[] DeCodePacket(ref List<byte> dataCache)
+        public static byte[] DecodePacket(ref List<byte> dataCache)
         {
             //四个字节构成一个int长度 不能构成一个完整的消息
             if (dataCache.Count < 4)
@@ -129,7 +129,7 @@ namespace AhpilyServer
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static byte[] EncodeObj(Object value)
+        public static byte[] EncodeObj(object value)
         {
             using (MemoryStream ms = new MemoryStream())
             {
@@ -147,7 +147,7 @@ namespace AhpilyServer
         /// <returns></returns>
         public static object DecodeObj(byte[] valueBytes)
         {
-            using (MemoryStream ms = new MemoryStream())
+            using (MemoryStream ms = new MemoryStream(valueBytes))
             {
                 BinaryFormatter bf = new BinaryFormatter();
                 object value = bf.Deserialize(ms);

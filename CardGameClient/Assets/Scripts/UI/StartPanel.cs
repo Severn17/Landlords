@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿using Protocol;
+using Protocol.Code;
+using Protocol.Dto;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -62,9 +65,10 @@ public class StartPanel : UIBase
             || inputPassword.text.Length < 4
             || inputPassword.text.Length > 16)
             return;
-        
-        //需要和服务器交互了
-        //TODO
+
+        AccountDto dto = new AccountDto(inputAccount.text, inputPassword.text);
+        SocketMsg socketMsg = new SocketMsg(OpCode.ACCOUNT, AccountCode.LOGIN, dto);
+        Dispatch(AreaCode.NET, 0, socketMsg);
     }
 
     private void closeClick()

@@ -6,3 +6,5 @@ D:\GitHubOrCoding\Unity\DouDiZhu\Landlords\GameServer\GameServer\bin\Debug\Ahpil
 D:\GitHubOrCoding\Unity\DouDiZhu\Landlords\GameServer\GameServer\obj\Debug\GameServer.csprojResolveAssemblyReference.cache
 D:\GitHubOrCoding\Unity\DouDiZhu\Landlords\GameServer\GameServer\obj\Debug\GameServer.exe
 D:\GitHubOrCoding\Unity\DouDiZhu\Landlords\GameServer\GameServer\obj\Debug\GameServer.pdb
+D:\GitHubOrCoding\Unity\DouDiZhu\Landlords\GameServer\GameServer\bin\Debug\Protocol.dll
+D:\GitHubOrCoding\Unity\DouDiZhu\Landlords\GameServer\GameServer\bin\Debug\Protocol.pdb

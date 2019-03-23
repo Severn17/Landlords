@@ -7,7 +7,7 @@ namespace AhpilyServer
     /// 客户端的连接池
     ///  重用客户端对象
     /// </summary>
-    class ClientPeerPool
+    public class ClientPeerPool
     {
         private Queue<ClientPeer> clientPeerQueue;
 

@@ -36,12 +36,6 @@ namespace AhpilyServer
             this.application = app;
         }
 
-        // 构造函数
-        public ServerPeer()
-        {
-            serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-        }
-
         /// <summary>
         /// 开启服务器
         /// </summary>
@@ -55,14 +49,14 @@ namespace AhpilyServer
                 acceptSemaphore = new Semaphore(maxCount, maxCount);
 
                 clientPeerPool = new ClientPeerPool(maxCount);
-                ClientPeer tepClientPeer = null;
+                ClientPeer tmpClientPeer = null;
                 for (int i = 0; i < maxCount; i++)
                 {
-                    tepClientPeer = new ClientPeer();
-                    tepClientPeer.ReceiveArgs.Completed += receive_Completed;
-                    tepClientPeer.receiveCompleted += receiveCompleted;
-                    tepClientPeer.sendDisconnet = Disconnect;
-                    clientPeerPool.Enqueue(tepClientPeer);
+                    tmpClientPeer = new ClientPeer();
+                    tmpClientPeer.ReceiveArgs.Completed += receive_Completed;
+                    tmpClientPeer.receiveCompleted = receiveCompleted;
+                    tmpClientPeer.sendDisconnect = Disconnect;
+                    clientPeerPool.Enqueue(tmpClientPeer);
                 }
 
                 serverSocket.Bind(new IPEndPoint(IPAddress.Any, port));
@@ -84,7 +78,7 @@ namespace AhpilyServer
             if (e == null)
             {
                 e = new SocketAsyncEventArgs();
-                e.Completed += acceptCompleted;
+                e.Completed += accept_Completed;
             }
 
 
@@ -101,9 +95,7 @@ namespace AhpilyServer
         /// <summary>
         /// 接受连接请求异步事件完成时触发
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void acceptCompleted(object sender, SocketAsyncEventArgs e)
+        private void accept_Completed(object sender, SocketAsyncEventArgs e)
         {
             processAccept(e);
         }
@@ -119,6 +111,8 @@ namespace AhpilyServer
             //Socket clientSocket = e.AcceptSocket;
             ClientPeer client = clientPeerPool.Dequeue();
             client.ClientSocket = e.AcceptSocket;
+
+            Console.WriteLine("客户端连接成功" + client.ClientSocket.RemoteEndPoint.ToString());
 
             // 开始接受数据
             startReceive(client);
@@ -188,7 +182,7 @@ namespace AhpilyServer
         /// <param name="e"></param>
         private void receive_Completed(object sender, SocketAsyncEventArgs e)
         {
-            processAccept(e);
+            processReceive(e);
         }
         /// <summary>
         /// 一条数据解析完成的处理
@@ -219,9 +213,12 @@ namespace AhpilyServer
                 if (client == null)
                     throw new Exception("当前指定的客户端连接对象为空,无法断开连接");
                 // 通知应用层 这个客户端断开连接
+                Console.WriteLine(client.ClientSocket.RemoteEndPoint + "客户端断开连接 原因:" + reason);
+
                 application.OnDisconnect(client);
-                client.Disconnet();
-                // 回收对象
+
+                client.Disconnect();
+                //回收对象方便下次使用
                 clientPeerPool.Enqueue(client);
                 acceptSemaphore.Release();
             }
