@@ -8,8 +8,8 @@ namespace Protocol.Dto
     [Serializable]
     public class AccountDto
     {
-        public string account;
-        public string password;
+        public string Account;
+        public string Password;
 
         public AccountDto()
         {
@@ -18,8 +18,8 @@ namespace Protocol.Dto
 
         public AccountDto(string acc,string pwd)
         {
-            this.account = acc;
-            this.password = pwd;
+            this.Account = acc;
+            this.Password = pwd;
         }
 
     }

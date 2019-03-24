@@ -49,7 +49,7 @@
     <Compile Include="IApplication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerPeer.cs" />
-    <Compile Include="SingleExcute.cs" />
+    <Compile Include="SingleExecute.cs" />
     <Compile Include="SocketMsg.cs" />
     <Compile Include="Util\ConCurrent\ConCurrentInt.cs" />
     <Compile Include="Util\iTimer\TimerManager.cs" />

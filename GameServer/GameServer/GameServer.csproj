@@ -46,8 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cache\AccountCache.cs" />
+    <Compile Include="Cache\Caches.cs" />
     <Compile Include="Logic\AccountHandler.cs" />
     <Compile Include="Logic\IHandler.cs" />
+    <Compile Include="Model\AccountModel.cs" />
     <Compile Include="NetMsgCenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -65,10 +68,7 @@
       <Name>Protocol</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Cache\" />
-    <Folder Include="Model\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

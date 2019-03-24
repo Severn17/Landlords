@@ -44,8 +44,7 @@ public class ClientPeer
         }
         catch (Exception e)
         {
-
-            throw;
+            Debug.LogError(e.Message);
         }
     }
 
@@ -64,7 +63,7 @@ public class ClientPeer
     /// </summary>
     private void startReceive()
     {
-        if (socket == null && socket.Connected)
+        if (socket == null && socket.Connected == false)
         {
             Debug.LogError("没有连接成功没法发送数据");
             return;
@@ -90,6 +89,7 @@ public class ClientPeer
             {
                 processReceive();
             }
+            startReceive();
         }
         catch (Exception e)
         {
@@ -114,6 +114,8 @@ public class ClientPeer
         SocketMsg msg = EncodeTool.DecodeMsg(data);
 
         SocketMsgQueue.Enqueue(msg);
+
+        Debug.Log(msg.Value);
 
         // 尾递归
         processReceive();

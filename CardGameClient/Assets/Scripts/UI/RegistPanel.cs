@@ -72,8 +72,8 @@ public class RegistPanel : UIBase
             || inputRepeat.text != inputPassword.text)
             return;
 
-        dto.account = inputAccount.text;
-        dto.password = inputPassword.text;
+        dto.Account = inputAccount.text;
+        dto.Password = inputPassword.text;
         socketMsg.OpCode = OpCode.ACCOUNT;
         socketMsg.SubCode = AccountCode.REGIST_CREQ;
         socketMsg.Value = dto;

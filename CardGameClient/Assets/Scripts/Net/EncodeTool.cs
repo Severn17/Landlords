@@ -127,7 +127,7 @@ public static class EncodeTool
     /// </summary>
     /// <param name="value"></param>
     /// <returns></returns>
-    public static byte[] EncodeObj(Object value)
+    public static byte[] EncodeObj(object value)
     {
         using (MemoryStream ms = new MemoryStream())
         {
@@ -145,7 +145,7 @@ public static class EncodeTool
     /// <returns></returns>
     public static object DecodeObj(byte[] valueBytes)
     {
-        using (MemoryStream ms = new MemoryStream())
+        using (MemoryStream ms = new MemoryStream(valueBytes))
         {
             BinaryFormatter bf = new BinaryFormatter();
             object value = bf.Deserialize(ms);
