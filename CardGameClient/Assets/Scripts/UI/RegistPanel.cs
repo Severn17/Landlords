@@ -30,6 +30,7 @@ public class RegistPanel : UIBase
     private InputField inputAccount;
     private InputField inputPassword;
     private InputField inputRepeat;
+    private PromptMsg promptMsg;
 
     // Use this for initialization
     void Start()
@@ -39,6 +40,8 @@ public class RegistPanel : UIBase
         inputAccount = transform.Find("inputAccount").GetComponent<InputField>();
         inputPassword = transform.Find("inputPassword").GetComponent<InputField>();
         inputRepeat = transform.Find("inputRepeat").GetComponent<InputField>();
+
+        promptMsg = new PromptMsg();
 
         btnClose.onClick.AddListener(closeClick);
         btnReigist.onClick.AddListener(registClick);
@@ -63,14 +66,26 @@ public class RegistPanel : UIBase
     private void registClick()
     {
         if (string.IsNullOrEmpty(inputAccount.text))
+        {
+            promptMsg.Change("注册的用户名不能为空！", Color.red);
+            Dispatch(AreaCode.UI, UIEvent.PROMPT_MSG, promptMsg);
             return;
+        }
         if (string.IsNullOrEmpty(inputPassword.text)
             || inputPassword.text.Length < 4
             || inputPassword.text.Length > 16)
+        {
+            promptMsg.Change("注册的密码不合法！", Color.red);
+            Dispatch(AreaCode.UI, UIEvent.PROMPT_MSG, promptMsg);
             return;
+        }
         if (string.IsNullOrEmpty(inputRepeat.text)
             || inputRepeat.text != inputPassword.text)
+        {
+            promptMsg.Change("请确保两次输入的密码一致！", Color.red);
+            Dispatch(AreaCode.UI, UIEvent.PROMPT_MSG, promptMsg);
             return;
+        }
 
         dto.Account = inputAccount.text;
         dto.Password = inputPassword.text;
