@@ -115,7 +115,7 @@ public class ClientPeer
 
         SocketMsgQueue.Enqueue(msg);
 
-        Debug.Log(msg.Value);
+        //Debug.Log(msg.Value);
 
         // 尾递归
         processReceive();

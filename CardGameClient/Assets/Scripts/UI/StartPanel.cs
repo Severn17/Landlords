@@ -1,5 +1,4 @@
-﻿using Protocol;
-using Protocol.Code;
+﻿using Protocol.Code;
 using Protocol.Dto;
 using System.Collections;
 using System.Collections.Generic;
@@ -31,6 +30,7 @@ public class StartPanel : UIBase
     private InputField inputAccount;
     private InputField inputPassword;
     private PromptMsg promptMsg;
+    private SocketMsg socketMsg;
 
     // Use this for initialization
     void Start()
@@ -44,6 +44,7 @@ public class StartPanel : UIBase
         btnClose.onClick.AddListener(closeClick);
 
         promptMsg = new PromptMsg();
+        socketMsg = new SocketMsg();
 
         //面板需要默认隐藏
         setPanelActive(false);
@@ -64,25 +65,25 @@ public class StartPanel : UIBase
     {
         if (string.IsNullOrEmpty(inputAccount.text))
         {
-            promptMsg.Change("登陆的用户名不能为空！", Color.red);
+            promptMsg.Change("登录的用户名不能为空！", Color.red);
             Dispatch(AreaCode.UI, UIEvent.PROMPT_MSG, promptMsg);  
             return;
         }
         if (string.IsNullOrEmpty(inputPassword.text))
         {
-            promptMsg.Change("登陆的密码不能为空！", Color.red);
+            promptMsg.Change("登录的密码不能为空！", Color.red);
             Dispatch(AreaCode.UI, UIEvent.PROMPT_MSG, promptMsg);
             return;
         }
             if (inputPassword.text.Length < 4 || inputPassword.text.Length > 16)
         {
-            promptMsg.Change("登陆的密码长度不合法，应该在4-16个字符之内！", Color.red);
+            promptMsg.Change("登录的密码长度不合法，应该在4-16个字符之内！", Color.red);
             Dispatch(AreaCode.UI, UIEvent.PROMPT_MSG, promptMsg);
             return;
         }
 
         AccountDto dto = new AccountDto(inputAccount.text, inputPassword.text);
-        SocketMsg socketMsg = new SocketMsg(OpCode.ACCOUNT, AccountCode.LOGIN, dto);
+        socketMsg.Change(OpCode.ACCOUNT, AccountCode.LOGIN, dto);
         Dispatch(AreaCode.NET, 0, socketMsg);
     }
 

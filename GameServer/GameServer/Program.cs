@@ -1,5 +1,6 @@
-﻿using System;
-using AhpilyServer;
+﻿using AhpilyServer;
+using System;
+using System.Collections.Generic;
 
 namespace GameServer
 {
@@ -8,9 +9,10 @@ namespace GameServer
         static void Main(string[] args)
         {
             ServerPeer server = new ServerPeer();
-            // 指定所关联的应用层
+            //指定所关联的应用
             server.SetApplication(new NetMsgCenter());
             server.Start(6666, 10);
+
             Console.ReadKey();
         }
     }

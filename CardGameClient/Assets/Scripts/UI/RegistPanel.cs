@@ -1,5 +1,4 @@
-﻿using Protocol;
-using Protocol.Code;
+﻿using Protocol.Code;
 using Protocol.Dto;
 using System.Collections;
 using System.Collections.Generic;
@@ -31,7 +30,7 @@ public class RegistPanel : UIBase
     private InputField inputPassword;
     private InputField inputRepeat;
     private PromptMsg promptMsg;
-
+    private SocketMsg socketMsg;
     // Use this for initialization
     void Start()
     {
@@ -41,10 +40,10 @@ public class RegistPanel : UIBase
         inputPassword = transform.Find("inputPassword").GetComponent<InputField>();
         inputRepeat = transform.Find("inputRepeat").GetComponent<InputField>();
 
-        promptMsg = new PromptMsg();
-
         btnClose.onClick.AddListener(closeClick);
         btnReigist.onClick.AddListener(registClick);
+        promptMsg = new PromptMsg();
+        socketMsg = new SocketMsg();
 
         setPanelActive(false);
     }
@@ -56,9 +55,6 @@ public class RegistPanel : UIBase
         btnClose.onClick.RemoveListener(closeClick);
         btnReigist.onClick.RemoveListener(registClick);
     }
-
-    AccountDto dto = new AccountDto();
-    SocketMsg socketMsg = new SocketMsg();
 
     /// <summary>
     /// 注册按钮的点击事件处理
@@ -87,13 +83,8 @@ public class RegistPanel : UIBase
             return;
         }
 
-        dto.Account = inputAccount.text;
-        dto.Password = inputPassword.text;
-        socketMsg.OpCode = OpCode.ACCOUNT;
-        socketMsg.SubCode = AccountCode.REGIST_CREQ;
-        socketMsg.Value = dto;
-        //AccountDto dto = new AccountDto(inputAccount.text, inputPassword.text);
-        //SocketMsg socketMsg = new SocketMsg(OpCode.ACCOUNT, AccountCode.REGIST_CREQ, dto);
+        AccountDto dto = new AccountDto(inputAccount.text, inputPassword.text);
+        socketMsg.Change(OpCode.ACCOUNT, AccountCode.REGIST_CREQ, dto);
         Dispatch(AreaCode.NET, 0, socketMsg);
     }
 

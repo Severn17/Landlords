@@ -21,4 +21,10 @@ public class SocketMsg
         this.SubCode = subCode;
         this.Value = value;
     }
+    public void Change(int opCode,int subCode,object value)
+    {
+        this.OpCode = opCode;
+        this.SubCode = subCode;
+        this.Value = value;
+    }
 }

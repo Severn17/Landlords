@@ -16,11 +16,10 @@ namespace Protocol.Dto
 
         }
 
-        public AccountDto(string acc,string pwd)
+        public AccountDto(string acc, string pwd)
         {
             this.Account = acc;
             this.Password = pwd;
         }
-
     }
 }

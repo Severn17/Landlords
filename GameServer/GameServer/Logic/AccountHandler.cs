@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AhpilyServer;
-using Protocol;
+using Protocol.Code;
 using Protocol.Dto;
 using GameServer.Cache;
-using Protocol.Code;
+
 
 namespace GameServer.Logic
 {
@@ -54,27 +54,34 @@ namespace GameServer.Logic
         {
             SingleExecute.Instance.Execute(() =>
             {
-                if (accountCache.isExist(account))
+                if (accountCache.IsExist(account))
                 {
                     //账号已经存在
-                    client.Send(OpCode.ACCOUNT, AccountCode.REGIST_CREQ, "账号已经存在");
+                    //client.Send(OpCode.ACCOUNT, AccountCode.REGIST_SRES, "账号已经存在");
+                    client.Send(OpCode.ACCOUNT, AccountCode.REGIST_SRES, -1);
                     return;
                 }
                 if (string.IsNullOrEmpty(account))
                 {
                     //账号输入不合法
-                    client.Send(OpCode.ACCOUNT, AccountCode.REGIST_CREQ, "账号输入不合法");
+                    //client.Send(OpCode.ACCOUNT, AccountCode.REGIST_SRES, "账号输入不合法");
+                    client.Send(OpCode.ACCOUNT, AccountCode.REGIST_SRES, -2);
+
                     return;
                 }
                 if (string.IsNullOrEmpty(password) || password.Length < 4 || password.Length > 16)
                 {
                     //密码不合法
-                    client.Send(OpCode.ACCOUNT, AccountCode.REGIST_CREQ, "密码不合法");
+                    //client.Send(OpCode.ACCOUNT, AccountCode.REGIST_SRES, "密码不合法");
+                    client.Send(OpCode.ACCOUNT, AccountCode.REGIST_SRES, -3);
+
                     return;
                 }
                 // 可以注册
                 accountCache.Create(account, password);
-                client.Send(OpCode.ACCOUNT, AccountCode.REGIST_CREQ, "注册成功");
+                //client.Send(OpCode.ACCOUNT, AccountCode.REGIST_SRES, "注册成功");
+                client.Send(OpCode.ACCOUNT, AccountCode.REGIST_SRES, 0);
+
             });
 
 
@@ -89,27 +96,31 @@ namespace GameServer.Logic
         {
             SingleExecute.Instance.Execute(() =>
             {
-                if (!accountCache.isExist(account))
+                if (!accountCache.IsExist(account))
                 {
                     // 账号不存在
-                    client.Send(OpCode.ACCOUNT, AccountCode.REGIST_SRES, "账号不存在");
+                    //client.Send(OpCode.ACCOUNT, AccountCode.LOGIN, "账号不存在");
+                    client.Send(OpCode.ACCOUNT, AccountCode.LOGIN, -1);
                     return;
                 }
                 if (accountCache.isOnline(account))
                 {
                     //账号输入不合法
-                    client.Send(OpCode.ACCOUNT, AccountCode.REGIST_SRES, "账号已在线");
+                    //client.Send(OpCode.ACCOUNT, AccountCode.LOGIN, "账号在线");
+                    client.Send(OpCode.ACCOUNT, AccountCode.LOGIN, -2);
                     return;
                 }
                 if (!accountCache.IsMatch(account, password))
                 {
                     //账号密码不匹配
-                    client.Send(OpCode.ACCOUNT, AccountCode.REGIST_SRES, "账号密码不匹配");
+                    //client.Send(OpCode.ACCOUNT, AccountCode.LOGIN, "账号密码不匹配");
+                    client.Send(OpCode.ACCOUNT, AccountCode.LOGIN, -3);
                     return;
                 }
                 // 登陆成功
                 accountCache.Online(client, account);
-                client.Send(OpCode.ACCOUNT, AccountCode.REGIST_SRES, "登陆成功");
+                //client.Send(OpCode.ACCOUNT, AccountCode.LOGIN, "登陆成功");
+                client.Send(OpCode.ACCOUNT, AccountCode.LOGIN, 0);
             });
         }
     }

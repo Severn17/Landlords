@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2017.4.3f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -247,8 +245,13 @@
     <Compile Include="Assets\Scripts\Framework\MsgCenter.cs" />
     <Compile Include="Assets\Scripts\Net\ClientPeer.cs" />
     <Compile Include="Assets\Scripts\Net\EncodeTool.cs" />
+    <Compile Include="Assets\Scripts\Net\HandlerBase.cs" />
+    <Compile Include="Assets\Scripts\Net\Impl\AccountHandler.cs" />
     <Compile Include="Assets\Scripts\Net\NetManager.cs" />
     <Compile Include="Assets\Scripts\Net\SocketMsg.cs" />
+    <Compile Include="Assets\Scripts\Scene\LoadSceneMsg.cs" />
+    <Compile Include="Assets\Scripts\Scene\SceneEvent.cs" />
+    <Compile Include="Assets\Scripts\Scene\SceneMgr.cs" />
     <Compile Include="Assets\Scripts\UI\Msg\PromptMsg.cs" />
     <Compile Include="Assets\Scripts\UI\PlayPanel.cs" />
     <Compile Include="Assets\Scripts\UI\RegistPanel.cs" />

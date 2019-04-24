@@ -33,7 +33,7 @@ namespace GameServer.Cache
         /// </summary>
         /// <param name="account"></param>
         /// <returns></returns>
-        public bool isExist(string account)
+        public bool IsExist(string account)
         {
             return accModelDict.ContainsKey(account);
         }

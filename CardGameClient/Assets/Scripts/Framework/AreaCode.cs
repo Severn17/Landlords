@@ -30,6 +30,10 @@ public class AreaCode
     /// </summary>
     public const int AUDIO = 4;
 
+    /// <summary>
+    /// Scene模块
+    /// </summary>
+    public const int SCENE = 5;
     //....
 
 }

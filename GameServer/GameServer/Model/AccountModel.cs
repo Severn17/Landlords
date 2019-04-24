@@ -15,8 +15,9 @@ namespace GameServer.Model
         public string Account;
         public string Password;
 
-        // 创建日期 电话号码
-        public AccountModel(int id,string account,string password)
+        //...创建日期 电话号码
+
+        public AccountModel(int id, string account, string password)
         {
             this.Id = id;
             this.Account = account;

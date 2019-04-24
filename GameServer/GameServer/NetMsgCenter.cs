@@ -1,14 +1,13 @@
 ﻿using AhpilyServer;
 using GameServer.Logic;
-using Protocol.Code;
 using System;
 using System.Collections.Generic;
-
+using Protocol.Code;
 
 namespace GameServer
 {
     /// <summary>
-    /// 网路消息中心
+    /// 网络的消息中心
     /// </summary>
     public class NetMsgCenter : IApplication
     {
@@ -29,7 +28,6 @@ namespace GameServer
                 default:
                     break;
             }
-
         }
     }
 }
